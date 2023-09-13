@@ -1,0 +1,62 @@
+1) What is Node.js?
+=Node.js is an open-source, server-side JavaScript runtime environment that allows you to run JavaScript code on the server. 
+
+2) What is a Module in Node.js?
+=In Node.js, a module is a self-contained unit of code that encapsulates specific functionality.
+Modules are used to organize and structure your Node.js applications, making it easier to manage and reuse code.
+Node.js follows the CommonJS module system, which defines how modules can be created, imported, and used within a Node.js application.
+
+3) Create a Web Server that listens to server ports and gives
+response back to the client using HTTP module.
+= const http = require('http');
+const port = 3000;
+const server = http.createServer((req, res) => {
+   res.writeHead(200, { 'Content-Type': 'text/plain' });
+res.end('Hello, World!\n');
+});
+server.listen(port, () => {
+  console.log(`Server is running and listening on port ${port}`);
+});
+
+4) Create a Node.js file that reads the HTML file, and return the
+content using the File System module.
+= 
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
+const port = 3000;
+const server = http.createServer((req, res) => {
+ if (req.url === '/index.html') {
+  const filePath = path.join(__dirname, 'index.html');
+ fs.readFile(filePath, 'utf8', (err, data) => {
+      if (err) {
+      res.writeHead(500, { 'Content-Type': 'text/plain' });
+        res.end('Internal Server Error');
+      } else {
+      res.writeHead(200, { 'Content-Type': 'text/html' });
+ res.end(data);
+      }
+    });
+  } else {
+     res.writeHead(404, { 'Content-Type': 'text/plain' });
+    res.end('Not Found');
+  }
+});
+server.listen(port, () => {
+  console.log(`Server is running and listening on port ${port}`);
+});
+
+5) Create a Node.js file for deleting the existing file using the File
+System module.
+= 
+const fs = require('fs');
+const filePathToDelete = 'example.txt';
+fs.unlink(filePathToDelete, (err) => {
+  if (err) {
+    console.error(`Error deleting the file: ${err.message}`);
+  } else {
+    console.log(`File '${filePathToDelete}' has been successfully deleted.`);
+  }
+});
+
+
